@@ -1,0 +1,9 @@
+{
+    "name": "VN Lunar Calendar Component",
+    "render_readme": true,
+    "homeassistant": "2025.1.0",
+    "country": ["VN"],
+    "iot_class": "local_push",
+    "domains": [],
+    "zip_release": false
+}

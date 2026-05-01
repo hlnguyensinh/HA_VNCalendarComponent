@@ -1,0 +1,13 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "VN Lunar Calendar đã được cấu hình. Cảm ơn bạn đã sử dụng!!!"
+    }
+  },
+  "issues": {
+    "restart_required_after_update": {
+      "title": "Khuyến nghị khởi động lại Home Assistant",
+      "description": "VN Lunar Calendar đã được cập nhật. Vui lòng reboot Home Assistant sau khi cập nhật integration để đảm bảo sử dụng phiên bản mới nhất."
+    }
+  }
+}

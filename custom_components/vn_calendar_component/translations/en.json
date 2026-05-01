@@ -1,0 +1,13 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "VN Lunar Calendar is already configured. Thank you & enjoy!!!"
+    }
+  },
+  "issues": {
+    "restart_required_after_update": {
+      "title": "Home Assistant restart recommended",
+      "description": "Please restart Home Assistant after updating the integration to ensure the latest version is loaded."
+    }
+  }
+}
