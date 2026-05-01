@@ -1,6 +1,18 @@
+[![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
+
 # VN Lunar Calendar Component for Home Assistant
 
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/hlnguyensinh/HA_VNCalendarComponent?style=for-the-badge" />
+  <img src="https://img.shields.io/github/stars/hlnguyensinh/HA_VNCalendarComponent?style=for-the-badge" />
+  <img src="https://img.shields.io/github/license/hlnguyensinh/HA_VNCalendarComponent?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Home%20Assistant-Custom%20Card-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Built%20with-ChatGPT-orange?style=for-the-badge" />
+</p>
+
+<p align="center">
 A modern Vietnamese Lunar Calendar integration for Home Assistant.
+</p>
 
 Supports:
 
@@ -23,9 +35,9 @@ Supports:
 - Solar → Lunar conversion
 - Leap lunar month support
 - Can Chi for:
-  - Year
-  - Month
-  - Day
+    - Year
+    - Month
+    - Day
 - Solar Terms (24 Tiết Khí)
 - Hoàng Đạo / Hắc Đạo
 - Vegetarian day detection
@@ -37,12 +49,12 @@ Supports:
 
 ### Services
 
-| Service | Description |
-|---|---|
-| `today` | Get today's lunar information |
-| `get_day` | Get lunar info of a specific day |
-| `get_month` | Get full month lunar data |
-| `get_year` | Get full year lunar data |
+| Service     | Description                      |
+| ----------- | -------------------------------- |
+| `today`     | Get today's lunar information    |
+| `get_day`   | Get lunar info of a specific day |
+| `get_month` | Get full month lunar data        |
+| `get_year`  | Get full year lunar data         |
 
 ---
 
@@ -50,16 +62,16 @@ Supports:
 
 ### Sensor
 
-| Entity | Description |
-|---|---|
+| Entity                     | Description               |
+| -------------------------- | ------------------------- |
 | `sensor.vn_calendar_today` | Today's lunar information |
 
 ---
 
 ### Binary Sensor
 
-| Entity | Description |
-|---|---|
+| Entity                              | Description                       |
+| ----------------------------------- | --------------------------------- |
 | `binary_sensor.vn_calendar_veg_day` | ON when today is a vegetarian day |
 
 ---
@@ -185,9 +197,9 @@ service: vn_calendar_component.today
 ```yaml
 service: vn_calendar_component.get_day
 data:
-  day: 2
-  month: 4
-  year: 2026
+    day: 2
+    month: 4
+    year: 2026
 response_variable: lunar
 ```
 
@@ -197,35 +209,27 @@ response_variable: lunar
 
 ```json
 {
-  "solar": {
-    "day": 2,
-    "month": 4,
-    "year": 2026
-  },
-  "lunar": {
-    "day": 15,
-    "month": 2,
-    "year": 2026,
-    "leap": false,
-    "canchi": {
-      "year": "Bính Ngọ",
-      "month": "Tân Mão",
-      "day": "Bính Ngọ"
+    "solar": {
+        "day": 2,
+        "month": 4,
+        "year": 2026
     },
-    "events": [
-      "Phật Thích Ca nhập Niết Bàn"
-    ]
-  },
-  "timezone": 7,
-  "solarTerm": [
-    "Xuân phân",
-    "🌸"
-  ],
-  "dayType": [
-    "Hắc đạo",
-    "⚡"
-  ],
-  "isVeg": true
+    "lunar": {
+        "day": 15,
+        "month": 2,
+        "year": 2026,
+        "leap": false,
+        "canchi": {
+            "year": "Bính Ngọ",
+            "month": "Tân Mão",
+            "day": "Bính Ngọ"
+        },
+        "events": ["Phật Thích Ca nhập Niết Bàn"]
+    },
+    "timezone": 7,
+    "solarTerm": ["Xuân phân", "🌸"],
+    "dayType": ["Hắc đạo", "⚡"],
+    "isVeg": true
 }
 ```
 
@@ -299,7 +303,8 @@ Lunar conversion algorithm inspired by:
 
 - Hồ Ngọc Đức lunar calendar algorithm
 - Traditional Vietnamese lunar calendar system
-- Develop by @Nguyen Sinh + AI
+- Developer: **Nguyen Sinh**
+- AI Support: ChatGPT (OpenAI)
 
 ---
 

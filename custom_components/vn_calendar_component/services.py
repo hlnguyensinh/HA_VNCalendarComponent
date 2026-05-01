@@ -29,11 +29,11 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
     lunarCache = hass.data[DOMAIN][entry.entry_id]["cache"]
     
     async def handle_today(call: ServiceCall):
-        clsLogger.log("services.py","async_setup_services","handle_today called")
+        # clsLogger.log("services.py","async_setup_services","handle_today called")
         return lunarCache.today()
 
     async def handle_get_day(call: ServiceCall):
-        clsLogger.log("services.py","async_setup_services","handle_get_day called")
+        # clsLogger.log("services.py","async_setup_services","handle_get_day called")
         day = call.data[PARAM_DAY]
         month = call.data[PARAM_MONTH]
         year = call.data[PARAM_YEAR]
@@ -47,14 +47,14 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         return result
 
     async def handle_get_month(call: ServiceCall):
-        clsLogger.log("services.py","async_setup_services","handle_get_month called")
+        # clsLogger.log("services.py","async_setup_services","handle_get_month called")
         year = call.data[PARAM_YEAR]
         month = call.data[PARAM_MONTH]
 
         return lunarCache.get_month(month, year)
 
     async def handle_get_year(call: ServiceCall):
-        clsLogger.log("services.py","async_setup_services","handle_get_year called")
+        # clsLogger.log("services.py","async_setup_services","handle_get_year called")
         year = call.data[PARAM_YEAR]
 
         result = lunarCache.get_year(
@@ -64,7 +64,7 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         return result
     
     async def handle_cleanup(call: ServiceCall):
-        clsLogger.log("services.py","async_setup_services","handle_cleanup called")
+        # clsLogger.log("services.py","async_setup_services","handle_cleanup called")
         lunarCache.cleanup(0)
 
     hass.services.async_register(

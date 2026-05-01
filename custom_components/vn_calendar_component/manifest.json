@@ -2,11 +2,11 @@
   "domain": "vn_calendar_component",
   "name": "VN Lunar Calendar Component",
   "version": "1.0.0",
-  "config_flow": true,
-  "documentation": "https://github.com/hlnguyensinh/HA_VNCalendarComponent",
-  "issue_tracker": "https://github.com/hlnguyensinh/HA_VNCalendarComponent/issues",
+  "documentation": "https://github.com/hlnguyensinh/HA_VNLunarCalendar/",
+  "issue_tracker": "https://github.com/hlnguyensinh/HA_VNLunarCalendar/issues",
   "dependencies": [],
   "codeowners": ["@hlnguyensinh"],
+  "config_flow": true,
   "requirements": [],
   "iot_class": "local_push"
 }

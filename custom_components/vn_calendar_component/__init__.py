@@ -4,6 +4,7 @@ from aiohttp import web
 
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.helpers.storage import Store
 from homeassistant.helpers import issue_registry as ir
 
 from .vnlunarcache import VNLunarCache
