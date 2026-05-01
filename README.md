@@ -76,6 +76,14 @@ Supports:
 
 ---
 
+## Setup:
+
+- HACS -> Custom repositories:
+    - Repository: `https://github.com/hlnguyensinh/HA_VNCalendarComponent`
+    - Type: `Integration`
+
+- Settings -> Devices & services -> Add integration -> VN Lunar Calendar Component
+
 ## Lovelace Calendar Card
 
 ### Features
@@ -161,7 +169,14 @@ VN Lunar Calendar Component
 
 # Lovelace Card
 
-## Resource
+### Resource
+
+- Setup from HACS: _(Recommend)_
+    - HACS -> Custom repositories
+        - Repository: https://github.com/hlnguyensinh/HA_VNLunarCalendar/releases/latest/download/vn_lunar_calendar.js
+        - Type: Dashboard
+
+- Or manual
 
 ```yaml
 url: /local/vn_lunar_calendar.js
@@ -170,7 +185,7 @@ type: module
 
 ---
 
-## Example Card
+### Example Card
 
 ```yaml
 type: custom:vn-lunar-calendar
