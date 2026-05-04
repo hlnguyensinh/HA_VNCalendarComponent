@@ -10,3 +10,4 @@
 | `get_year`         | Get full year lunar data                  |
 | `good_hours`       | Get good hours in a day with current time |
 | `good_hours_today` | Get good hours today with current time    |
+| `get_zodiac_hours` | Get Zodiac hours                          |

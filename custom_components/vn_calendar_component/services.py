@@ -11,12 +11,13 @@ from .const import (
     SERVICE_CLEANUP,
     SERVICE_GOOD_HOURS,
     SERVICE_GOOD_HOURS_TODAY,
+    SERVICE_GET_ZODIAC_HOURS,
 )
 
 
 async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
     clsLogger = hass.data[DOMAIN][entry.entry_id]["logger"]
-    
+
     if hass.services.has_service(DOMAIN, SERVICE_TODAY):
         return
     if hass.services.has_service(DOMAIN, SERVICE_GET_DAY):
@@ -31,9 +32,11 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         return
     if hass.services.has_service(DOMAIN, SERVICE_GOOD_HOURS_TODAY):
         return
-    
+    if hass.services.has_service(DOMAIN, SERVICE_GET_ZODIAC_HOURS):
+        return
+
     lunarCache = hass.data[DOMAIN][entry.entry_id]["cache"]
-    
+
     async def handle_today(call: ServiceCall):
         # clsLogger.log("services.py","async_setup_services","handle_today called")
         return lunarCache.today()
@@ -68,12 +71,11 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         )
 
         return result
-    
+
     async def handle_cleanup(call: ServiceCall):
         # clsLogger.log("services.py","async_setup_services","handle_cleanup called")
         lunarCache.cleanup(0)
 
-    
     async def handle_good_hours(call: ServiceCall):
         # clsLogger.log("services.py","async_setup_services","handle_good_hour called")
         day = call.data[PARAM_DAY]
@@ -87,10 +89,16 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         )
 
         return result
-    
+
     async def handle_good_hours_today(call: ServiceCall):
         # clsLogger.log("services.py","async_setup_services","handle_good_hour_today called")
         result = lunarCache.get_current_hour_info_today()
+
+        return result
+
+    async def handle_zodiac_hours(call: ServiceCall):
+        # clsLogger.log("services.py","async_setup_services","handle_thoithan called")
+        result = lunarCache.get_zodiac_hours()
 
         return result
 
@@ -148,9 +156,17 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         supports_response=SupportsResponse.ONLY,
     )
 
+    hass.services.async_register(
+        DOMAIN,
+        SERVICE_GET_ZODIAC_HOURS,
+        handle_zodiac_hours,
+        supports_response=SupportsResponse.ONLY,
+    )
+
+
 async def async_remove_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
     clsLogger = hass.data[DOMAIN][entry.entry_id]["logger"]
-    clsLogger.log("services.py","async_remove_services","Remove services called")
+    clsLogger.log("services.py", "async_remove_services", "Remove services called")
 
     if hass.services.has_service(DOMAIN, SERVICE_TODAY):
         hass.services.async_remove(DOMAIN, SERVICE_TODAY)
@@ -166,3 +182,5 @@ async def async_remove_services(hass: HomeAssistant, entry: ConfigEntry) -> None
         hass.services.async_remove(DOMAIN, SERVICE_GOOD_HOURS)
     if hass.services.has_service(DOMAIN, SERVICE_GOOD_HOURS_TODAY):
         hass.services.async_remove(DOMAIN, SERVICE_GOOD_HOURS_TODAY)
+    if hass.services.has_service(DOMAIN, SERVICE_GET_ZODIAC_HOURS):
+        hass.services.async_remove(DOMAIN, SERVICE_GET_ZODIAC_HOURS)

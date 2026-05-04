@@ -24,7 +24,11 @@ async def async_setup_entry(
     lunarCache = hass.data[DOMAIN][entry.entry_id]["cache"]
 
     async_add_entities(
-        [VnLunarTodaySensor(hass, lunarCache), VnLunarDayTypeSensor(hass, lunarCache)]
+        [
+            VnLunarTodaySensor(hass, lunarCache),
+            VnLunarDayTypeSensor(hass, lunarCache),
+            VnLunarSolarTermSensor(hass, lunarCache),
+        ]
     )
 
 
@@ -183,7 +187,7 @@ class VnLunarSolarTermSensor(SensorEntity):
 
 #     clsLunar = VNLunarCache()
 
-#     sensor = VnLunarSolarTermSensor(FakeHass(), clsLunar)
+#     sensor = VnLunarTodaySensor(FakeHass(), clsLunar)
 
 #     sensor.update_lunar()
 

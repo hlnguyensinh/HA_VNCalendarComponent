@@ -4,7 +4,7 @@ DEFAULT_NAME = "VN Lunar Calendar Component"
 
 TIME_ZONE = 7
 
-VERSION = "1.1.1"
+VERSION = "1.1.2"
 
 # ==== SERVICES ====
 SERVICE_GET_DAY = "get_day"
@@ -14,6 +14,7 @@ SERVICE_TODAY = "today"
 SERVICE_CLEANUP = "cleanup"
 SERVICE_GOOD_HOURS = "good_hours"
 SERVICE_GOOD_HOURS_TODAY = "good_hours_today"
+SERVICE_GET_ZODIAC_HOURS = "get_zodiac_hours"
 
 # ==== PARAMS ====
 PARAM_DAY = "day"

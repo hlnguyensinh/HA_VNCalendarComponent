@@ -75,3 +75,12 @@
   entity_nobg: input_boolean.vn_lunar_nobg
   entity_readonly: input_boolean.vn_lunar_calendar_readonly
 ```
+
+## [1.1.1] & [1.1.2] - 2026-05-04
+- Update services.yaml
+- Active vn_calendar_solar_term sensor
+- Add new service:
+
+| Service            | Description      |
+| ------------------ | ---------------- |
+| `get_zodiac_hours` | Get Zodiac hours |

@@ -14,7 +14,7 @@ class VNLunarCache:
         self.cache = {}
 
         self.clsLunar = VNLunarExtra()
-        self.thoithancache = self.clsLunar.getThoiThan();
+        self.thoithancache = self.clsLunar.getThoiThan()
 
     def buildYear(self, year: int) -> dict:
         data = {}
@@ -126,8 +126,6 @@ class VNLunarCache:
             lencached = len(self.cache)
             print(f"after: ", lencached)
 
-    
-
     def get_current_hour_chi(self) -> str | None:
         now = datetime.now()
 
@@ -144,27 +142,18 @@ class VNLunarCache:
 
             # handle crossing midnight (Tý hour)
             if end_minutes < start_minutes:
-                if (
-                    current_minutes >= start_minutes
-                    or current_minutes < end_minutes
-                ):
+                if current_minutes >= start_minutes or current_minutes < end_minutes:
                     return chi
             else:
-                if (
-                    current_minutes >= start_minutes
-                    and current_minutes < end_minutes
-                ):
+                if current_minutes >= start_minutes and current_minutes < end_minutes:
                     return chi
 
         return None
-    
+
     def is_current_good_hour(self, goodhours: list) -> bool:
         current_chi = self.get_current_hour_chi()
 
-        return any(
-            item["name"] == current_chi
-            for item in goodhours
-        )
+        return any(item["name"] == current_chi for item in goodhours)
 
     def get_current_hour_info(self, dd: int, mm: int, yy: int) -> dict:
         dayinfo = self.get(dd, mm, yy)
@@ -175,9 +164,7 @@ class VNLunarCache:
             "goodhours": dayinfo.get("goodHours", []),
             "hour": hour,
             "range": self.thoithancache.get(hour),
-            "isgoodhour": self.is_current_good_hour(
-                dayinfo.get("goodHours", [])
-            ),
+            "isgoodhour": self.is_current_good_hour(dayinfo.get("goodHours", [])),
         }
 
     def get_current_hour_info_today(self) -> dict:
@@ -189,10 +176,11 @@ class VNLunarCache:
             "goodhours": dayinfo.get("goodHours", []),
             "hour": hour,
             "range": self.thoithancache.get(hour),
-            "isgoodhour": self.is_current_good_hour(
-                dayinfo.get("goodHours", [])
-            ),
+            "isgoodhour": self.is_current_good_hour(dayinfo.get("goodHours", [])),
         }
+
+    def getThoiThan(self) -> dict:
+        return self.thoithancache
 
 
 ####--------------------------------------------------------------------

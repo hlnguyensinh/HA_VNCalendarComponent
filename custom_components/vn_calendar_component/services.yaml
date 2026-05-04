@@ -93,3 +93,7 @@ good_hours:
 good_hours_today:
   name: Get good hours today
   description: Get good hours today
+
+get_zodiac_hours:
+  name: Get Zodiac hours
+  description: Get Zodiac hours
