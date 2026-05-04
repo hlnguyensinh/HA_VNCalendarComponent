@@ -1,7 +1,7 @@
 {
   "domain": "vn_calendar_component",
   "name": "VN Lunar Calendar Component",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "documentation": "https://github.com/hlnguyensinh/HA_VNLunarCalendar/",
   "issue_tracker": "https://github.com/hlnguyensinh/HA_VNLunarCalendar/issues",
   "dependencies": [],

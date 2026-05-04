@@ -62,7 +62,7 @@ today:
   name: Get today information
   description: Get today information
 
-good_hour:
+good_hours:
   name: Get good hours a solar date
   description: Get good hours lunar day from solar date
   fields:
@@ -90,6 +90,6 @@ good_hour:
           min: 1900
           max: 2100
 
-good_hour_today:
-  name: Get good hour today
+good_hours_today:
+  name: Get good hours today
   description: Get good hours today
