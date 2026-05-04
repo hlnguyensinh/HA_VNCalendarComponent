@@ -8,107 +8,6 @@ from .const import TIME_ZONE
 class VNLunar:
     PI = math.pi
 
-    CAN = [
-        "Giáp",
-        "Ất",
-        "Bính",
-        "Đinh",
-        "Mậu",
-        "Kỷ",
-        "Canh",
-        "Tân",
-        "Nhâm",
-        "Quý",
-    ]
-
-    CHI = [
-        "Tý",
-        "Sửu",
-        "Dần",
-        "Mão",
-        "Thìn",
-        "Tỵ",
-        "Ngọ",
-        "Mùi",
-        "Thân",
-        "Dậu",
-        "Tuất",
-        "Hợi",
-    ]
-
-    SOLAR_TERM_EMOJI = [
-        # 🌸 Xuân
-        ["Xuân phân", "🌸"],
-        ["Thanh minh", "🌿"],
-        ["Cốc vũ", "🌧️"],
-        # ☀️ Hạ
-        ["Lập hạ", "🌱"],
-        ["Tiểu mãn", "🌾"],
-        ["Mang chủng", "🌾"],
-        ["Hạ chí", "☀️"],
-        ["Tiểu thử", "🌤️"],
-        ["Đại thử", "🔥"],
-        # 🍂 Thu
-        ["Lập thu", "🍃"],
-        ["Xử thử", "🌬️"],
-        ["Bạch lộ", "💧"],
-        ["Thu phân", "🍂"],
-        ["Hàn lộ", "❄️"],
-        ["Sương giáng", "🌫️"],
-        # ❄️ Đông
-        ["Lập đông", "🌨️"],
-        ["Tiểu tuyết", "❄️"],
-        ["Đại tuyết", "☃️"],
-        ["Đông chí", "🌙"],
-        ["Tiểu hàn", "🥶"],
-        ["Đại hàn", "🧊"],
-        # 🌱 Cuối đông → xuân
-        ["Lập xuân", "🌱"],
-        ["Vũ thủy", "🌧️"],
-        ["Kinh trập", "⚡"],
-    ]
-
-    HOANG_DAO = [
-        ["Hắc đạo", "⚡"],
-        ["Hoàng đạo", "🍀"],
-    ]
-
-    HOANG_DAO_TABLE = {
-        1: ["Tý", "Sửu", "Tỵ", "Mùi"],
-        2: ["Dần", "Mão", "Mùi", "Dậu"],
-        3: ["Thìn", "Tỵ", "Dậu", "Hợi"],
-        4: ["Ngọ", "Mùi", "Hợi", "Sửu"],
-        5: ["Thân", "Dậu", "Sửu", "Mão"],
-        6: ["Tuất", "Hợi", "Mão", "Tỵ"],
-        7: ["Tý", "Sửu", "Tỵ", "Mùi"],
-        8: ["Dần", "Mão", "Mùi", "Dậu"],
-        9: ["Thìn", "Tỵ", "Dậu", "Hợi"],
-        10: ["Ngọ", "Mùi", "Hợi", "Sửu"],
-        11: ["Thân", "Dậu", "Sửu", "Mão"],
-        12: ["Tuất", "Hợi", "Mão", "Tỵ"],
-    }
-
-    BUDDHA_EVENTS = {
-        "1-1": ["Di Lặc Bồ Tát"],
-        "8-2": ["Phật Thích Ca xuất gia"],
-        "15-2": ["Phật Thích Ca nhập Niết Bàn"],
-        "19-2": ["Quan Âm đản sinh"],
-        "21-2": ["Phổ Hiền Bồ Tát"],
-        "16-3": ["Phật Thích Ca đản sinh (Nam tông)"],
-        "4-4": ["Văn Thù Bồ Tát"],
-        "8-4": ["Phật Thích Ca đản sinh (Bắc tông)"],
-        "15-4": ["Phật Thích Ca thành đạo"],
-        "13-6": ["Quan Âm thành đạo"],
-        "15-7": ["Vu Lan (Ullambana)"],
-        "19-6": ["Quan Âm thành đạo"],
-        "30-7": ["Địa Tạng Vương Bồ Tát"],
-        "22-9": ["Dược Sư Phật"],
-        "19-9": ["Quan Âm xuất gia"],
-        "8-12": ["Phật Thích Ca thành đạo"],
-    }
-
-    VEG_DAY = [1, 15]
-
     def INT(self, d: float) -> int:
         return math.floor(d)
 
@@ -249,50 +148,8 @@ class VNLunar:
                 break
 
         return i - 1
-
-    def canChiYear(self, lunarYear: int) -> str:
-        return self.CAN[(lunarYear + 6) % 10] + " " + self.CHI[(lunarYear + 8) % 12]
-
-    def canChiMonth(self, lunarYear: int, lunarMonth: int) -> str:
-        yearCan = (lunarYear + 6) % 10
-        canIndex = (yearCan * 2 + lunarMonth + 1) % 10
-        chiIndex = (lunarMonth + 1) % 12
-
-        return self.CAN[canIndex] + " " + self.CHI[chiIndex]
-
-    def canChiDay(self, jd: int) -> str:
-        return self.CAN[(jd + 9) % 10] + " " + self.CHI[(jd + 1) % 12]
-
-    def canChiDayFromSolar(self, dd: int, mm: int, yy: int) -> str:
-        jd = self.jdFromDate(dd, mm, yy)
-        return self.canChiDay(jd)
-
-    def solarTerm(self, jd: int, timeZone: int) -> list:
-        L = self.SunLongitude(jd - 0.5 - timeZone / 24)
-        degree = (L * 180) / self.PI
-
-        index = self.INT(degree / 15)
-        return self.SOLAR_TERM_EMOJI[index]
-
-    def solarTermFromSolar(self, dd: int, mm: int, yy: int, timeZone: int) -> list:
-        jd = self.jdFromDate(dd, mm, yy)
-        return self.solarTerm(jd, timeZone)
-
-    def dayType(self, lunarMonth: int, dayCanChi: str) -> list:
-        chi = dayCanChi.split(" ")[1]
-
-        goodlist = self.HOANG_DAO_TABLE.get(lunarMonth, [])
-
-        return self.HOANG_DAO[1] if chi in goodlist else self.HOANG_DAO[0]
-
-    def isVegDay(self, lunarDay: int) -> bool:
-        return True if lunarDay in self.VEG_DAY else False
-
-    def buddhaEvents(self, lunarDay: int, lunarMonth: int) -> list:
-        events = self.BUDDHA_EVENTS.get(str(lunarDay) + "-" + str(lunarMonth), [])
-        return events
-
-    def convertSolar2Lunar(self, dd: int, mm: int, yy: int, timeZone: int) -> dict:
+    
+    def convertSolar2Lunar(self, dd: int, mm: int, yy: int, timeZone: int) -> list:
         dayNumber = self.jdFromDate(dd, mm, yy)
 
         k = self.INT((dayNumber - 2415021.076998695) / 29.530588853)
@@ -331,29 +188,7 @@ class VNLunar:
         if lunarMonth >= 11 and diff < 4:
             lunarYear -= 1
 
-        return {
-            "solar": {
-                "day": dd,
-                "month": mm,
-                "year": yy,
-            },
-            "lunar": {
-                "day": lunarDay,
-                "month": lunarMonth,
-                "year": lunarYear,
-                "leap": True if lunarLeap else False,
-                "canchi": {
-                    "year": self.canChiYear(lunarYear),
-                    "month": self.canChiMonth(lunarYear, lunarMonth),
-                    "day": self.canChiDay(dayNumber),
-                },
-                "events": self.buddhaEvents(lunarDay, lunarMonth),
-            },
-            "timezone": timeZone,
-            "solarTerm": self.solarTerm(dayNumber, timeZone),
-            "dayType": self.dayType(lunarMonth, self.canChiDay(dayNumber)),
-            "isVeg": self.isVegDay(lunarDay),
-        }
+        return [lunarDay, lunarMonth, lunarYear, lunarLeap]
 
     def convertLunar2Solar(
         self,
@@ -406,9 +241,10 @@ class VNLunar:
 
 # from datetime import datetime
 
-# now = datetime.now()
-# clsLunar = VNLunar()
+# if __name__ == "__main__":
+#     now = datetime.now()
+#     clsLunar = VNLunar()
 
-# print(clsLunar.convertSolar2Lunar(now.day, now.month, now.year, 7))
-# print(clsLunar.convertSolar2Lunar(2, 4, 2026, 7))
-# print(clsLunar.convertLunar2Solar(13, 3, 2026, 0, 7))
+#     print(clsLunar.convertSolar2Lunar(now.day, now.month, now.year, 7))
+#     print(clsLunar.convertSolar2Lunar(2, 4, 2026, 7))
+#     print(clsLunar.convertLunar2Solar(13, 3, 2026, 0, 7))

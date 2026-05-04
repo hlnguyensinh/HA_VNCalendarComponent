@@ -1,6 +1,6 @@
 from datetime import date, timedelta, datetime
 
-from .vnlunar import VNLunar
+from .vnlunarextra import VNLunarExtra
 from .const import TIME_ZONE
 
 ####--------------------------------------------------------------------
@@ -13,7 +13,8 @@ class VNLunarCache:
 
         self.cache = {}
 
-        self.clsLunar = VNLunar()
+        self.clsLunar = VNLunarExtra()
+        self.thoithancache = self.clsLunar.getThoiThan();
 
     def buildYear(self, year: int) -> dict:
         data = {}
@@ -29,7 +30,7 @@ class VNLunarCache:
             mm = d.month
             yy = d.year
 
-            lunar = self.clsLunar.convertSolar2Lunar(
+            lunar = self.clsLunar.getLunarDay(
                 dd,
                 mm,
                 yy,
@@ -125,16 +126,90 @@ class VNLunarCache:
             lencached = len(self.cache)
             print(f"after: ", lencached)
 
+    
+
+    def get_current_hour_chi(self) -> str | None:
+        now = datetime.now()
+
+        current_minutes = now.hour * 60 + now.minute
+
+        for chi, time_range in self.thoithancache.items():
+            start, end = time_range.split("-")
+
+            sh, sm = map(int, start.split(":"))
+            eh, em = map(int, end.split(":"))
+
+            start_minutes = sh * 60 + sm
+            end_minutes = eh * 60 + em
+
+            # handle crossing midnight (Tý hour)
+            if end_minutes < start_minutes:
+                if (
+                    current_minutes >= start_minutes
+                    or current_minutes < end_minutes
+                ):
+                    return chi
+            else:
+                if (
+                    current_minutes >= start_minutes
+                    and current_minutes < end_minutes
+                ):
+                    return chi
+
+        return None
+    
+    def is_current_good_hour(self, goodhours: list) -> bool:
+        current_chi = self.get_current_hour_chi()
+
+        return any(
+            item["name"] == current_chi
+            for item in goodhours
+        )
+
+    def get_current_hour_info(self, dd: int, mm: int, yy: int) -> dict:
+        dayinfo = self.get(dd, mm, yy)
+
+        hour = self.get_current_hour_chi()
+
+        return {
+            "goodhours": dayinfo.get("goodHours", []),
+            "hour": hour,
+            "range": self.thoithancache.get(hour),
+            "isgoodhour": self.is_current_good_hour(
+                dayinfo.get("goodHours", [])
+            ),
+        }
+
+    def get_current_hour_info_today(self) -> dict:
+        dayinfo = self.today()
+
+        hour = self.get_current_hour_chi()
+
+        return {
+            "goodhours": dayinfo.get("goodHours", []),
+            "hour": hour,
+            "range": self.thoithancache.get(hour),
+            "isgoodhour": self.is_current_good_hour(
+                dayinfo.get("goodHours", [])
+            ),
+        }
+
 
 ####--------------------------------------------------------------------
 
 # from datetime import datetime
 
 # clsLunarCache = VNLunarCache()
+
 # clsLunarCache.preload([2022,2023,2024,2025,2026,2027,2028,2029])
 # print(clsLunarCache.buildYear(2026))
-# print(clsLunarCache.get(now.day, now.month, now.year))
-# print(clsLunarCache.get_month(now.month, now.year))
-# print(clsLunarCache.get_year(now.year))
 # print(clsLunarCache.today())
 # print(clsLunarCache.cleanup())
+
+# now = datetime.now()
+# testday = clsLunarCache.get(now.day, now.month, now.year)
+# print(clsLunarCache.get_month(now.month, now.year))
+# print(clsLunarCache.get_year(now.year))
+# print(testday)
+# print(clsLunarCache.get_current_hour_info(2,5,2026))
+# print(clsLunarCache.get_current_hour_info(now.day, now.month, now.year))

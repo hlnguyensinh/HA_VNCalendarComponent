@@ -1,63 +1,95 @@
 get_day:
-    name: Get lunar day from solar date
-    description: Get lunar information from solar date
-    fields:
-        day:
-            required: true
-            example: 1
-            selector:
-                number:
-                    min: 1
-                    max: 31
+  name: Get lunar day from solar date
+  description: Get lunar information from solar date
+  fields:
+    day:
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 1
+          max: 31
 
-        month:
-            required: true
-            example: 1
-            selector:
-                number:
-                    min: 1
-                    max: 12
+    month:
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 1
+          max: 12
 
-        year:
-            required: true
-            example: 2026
-            selector:
-                number:
-                    min: 1900
-                    max: 2100
+    year:
+      required: true
+      example: 2026
+      selector:
+        number:
+          min: 1900
+          max: 2100
 
 get_month:
-    name: Get a month calendar
-    description: Get lunar information from solar month
-    fields:
-        month:
-            required: true
-            example: 1
-            selector:
-                number:
-                    min: 1
-                    max: 12
+  name: Get a month calendar
+  description: Get lunar information from solar month
+  fields:
+    month:
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 1
+          max: 12
 
-        year:
-            required: true
-            example: 2026
-            selector:
-                number:
-                    min: 1900
-                    max: 2100
+    year:
+      required: true
+      example: 2026
+      selector:
+        number:
+          min: 1900
+          max: 2100
 
 get_year:
-    name: Get a year calendar
-    description: Get lunar information from solar year
-    fields:
-        year:
-            required: true
-            example: 2026
-            selector:
-                number:
-                    min: 1900
-                    max: 2100
+  name: Get a year calendar
+  description: Get lunar information from solar year
+  fields:
+    year:
+      required: true
+      example: 2026
+      selector:
+        number:
+          min: 1900
+          max: 2100
 
 today:
-    name: Get today information
-    description: Get today information
+  name: Get today information
+  description: Get today information
+
+good_hour:
+  name: Get good hours a solar date
+  description: Get good hours lunar day from solar date
+  fields:
+    day:
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 1
+          max: 31
+
+    month:
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 1
+          max: 12
+
+    year:
+      required: true
+      example: 2026
+      selector:
+        number:
+          min: 1900
+          max: 2100
+
+good_hour_today:
+  name: Get good hour today
+  description: Get good hours today

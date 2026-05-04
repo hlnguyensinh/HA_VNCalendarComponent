@@ -9,6 +9,8 @@ from .const import (
     SERVICE_GET_MONTH,
     SERVICE_GET_YEAR,
     SERVICE_CLEANUP,
+    SERVICE_GOOD_HOURS,
+    SERVICE_GOOD_HOURS_TODAY,
 )
 
 
@@ -24,6 +26,10 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
     if hass.services.has_service(DOMAIN, SERVICE_GET_YEAR):
         return
     if hass.services.has_service(DOMAIN, SERVICE_CLEANUP):
+        return
+    if hass.services.has_service(DOMAIN, SERVICE_GOOD_HOURS):
+        return
+    if hass.services.has_service(DOMAIN, SERVICE_GOOD_HOURS_TODAY):
         return
     
     lunarCache = hass.data[DOMAIN][entry.entry_id]["cache"]
@@ -67,6 +73,27 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         # clsLogger.log("services.py","async_setup_services","handle_cleanup called")
         lunarCache.cleanup(0)
 
+    
+    async def handle_good_hours(call: ServiceCall):
+        # clsLogger.log("services.py","async_setup_services","handle_good_hour called")
+        day = call.data[PARAM_DAY]
+        month = call.data[PARAM_MONTH]
+        year = call.data[PARAM_YEAR]
+
+        result = lunarCache.get_current_hour_info(
+            day,
+            month,
+            year,
+        )
+
+        return result
+    
+    async def handle_good_hours_today(call: ServiceCall):
+        # clsLogger.log("services.py","async_setup_services","handle_good_hour_today called")
+        result = lunarCache.get_current_hour_info_today()
+
+        return result
+
     hass.services.async_register(
         DOMAIN,
         SERVICE_TODAY,
@@ -106,6 +133,21 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         supports_response=SupportsResponse.ONLY,
     )
 
+    hass.services.async_register(
+        DOMAIN,
+        SERVICE_GOOD_HOURS,
+        handle_good_hours,
+        schema=GET_DAY_SCHEMA,
+        supports_response=SupportsResponse.ONLY,
+    )
+
+    hass.services.async_register(
+        DOMAIN,
+        SERVICE_GOOD_HOURS_TODAY,
+        handle_good_hours_today,
+        supports_response=SupportsResponse.ONLY,
+    )
+
 async def async_remove_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
     clsLogger = hass.data[DOMAIN][entry.entry_id]["logger"]
     clsLogger.log("services.py","async_remove_services","Remove services called")
@@ -120,3 +162,7 @@ async def async_remove_services(hass: HomeAssistant, entry: ConfigEntry) -> None
         hass.services.async_remove(DOMAIN, SERVICE_GET_YEAR)
     if hass.services.has_service(DOMAIN, SERVICE_CLEANUP):
         hass.services.async_remove(DOMAIN, SERVICE_CLEANUP)
+    if hass.services.has_service(DOMAIN, SERVICE_GOOD_HOURS):
+        hass.services.async_remove(DOMAIN, SERVICE_GOOD_HOURS)
+    if hass.services.has_service(DOMAIN, SERVICE_GOOD_HOURS_TODAY):
+        hass.services.async_remove(DOMAIN, SERVICE_GOOD_HOURS_TODAY)
