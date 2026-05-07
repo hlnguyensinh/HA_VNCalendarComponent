@@ -2,7 +2,13 @@
     "name": "VN Lunar Calendar Component",
     "render_readme": true,
     "homeassistant": "2025.1.0",
-    "country": ["VN"],
-    "domains": ["vn_calendar_component"],
+    "country": [
+        "VN"
+    ],
+    "domains": [
+        "vn_calendar_component"
+    ],
+    "iot_class": "calculated",
+    "content_in_root": false,
     "zip_release": false
 }
