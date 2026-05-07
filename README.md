@@ -170,7 +170,7 @@ VN Lunar Calendar Component
 
 - Setup from HACS: _(Recommend)_
     - HACS -> Custom repositories
-        - Repository: https://github.com/hlnguyensinh/HA_VNLunarCalendar/releases/latest/download/vn_lunar_calendar.js
+        - Repository: https://github.com/hlnguyensinh/HA_VNLunarCalendar/releases/latest/download/HA_VNLunarCalendar.zip
         - Type: Dashboard
 
 - Or manual
