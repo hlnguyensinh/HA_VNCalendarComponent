@@ -7,7 +7,6 @@
   <img src="https://img.shields.io/github/stars/hlnguyensinh/HA_VNCalendarComponent?style=for-the-badge" />
   <img src="https://img.shields.io/github/license/hlnguyensinh/HA_VNCalendarComponent?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Home%20Assistant-Custom%20Card-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Built%20with-ChatGPT-orange?style=for-the-badge" />
 </p>
 
 <p align="center">

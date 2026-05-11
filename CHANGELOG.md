@@ -110,3 +110,10 @@
 | `entity_hide_event`          | input_text    | False         | Hide lunar events tag                         |          |
 | `entity_textpanel`           | any sensor    | N/A           | Show value (ex: sensor.vn_calendar_day_type)  |          |
 | `entity_theme_nocache`       | input_boolean | False         | Not use theme cache                           |          |
+
+## [1.2.1] - 2026-05-08
+- Fix invalid manifest.json
+- Fix HACS update/install issue
+
+## [1.2.2] - 2026-05-11
+- Update manifest.json, change "integration_type" from "entity" to "hub"
