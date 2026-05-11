@@ -80,6 +80,9 @@ Supports:
 
 - Settings -> Devices & services -> Add integration -> VN Lunar Calendar Component
 
+<video src="https://raw.githubusercontent.com/hlnguyensinh/HA_VNLunarCalendar/main/screenshots/setup_guide.mp4" controls="controls" style="max-width: 100%;">
+</video>
+
 ## Lovelace Calendar Card
 
 ### Features
