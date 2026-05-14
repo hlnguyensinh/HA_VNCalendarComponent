@@ -20,6 +20,7 @@ ISSUE_RESTART = "restart_required_after_update"
 STORAGE_VERSION = 1
 STORAGE_KEY = f"{DOMAIN}_version"
 
+
 async def detect_version_update(hass):
     """Detect integration version changes and warn user to restart HA."""
 
@@ -31,10 +32,12 @@ async def detect_version_update(hass):
 
     # First install -> just save version
     if old_version is None:
-        await store.async_save({
-            "version": VERSION,
-            "pending_restart": False,
-        })
+        await store.async_save(
+            {
+                "version": VERSION,
+                "pending_restart": False,
+            }
+        )
         return
 
     # Version changed -> create warning
@@ -50,10 +53,12 @@ async def detect_version_update(hass):
         )
 
         # Save new version
-        await store.async_save({
-            "version": VERSION,
-            "pending_restart": True,
-        })
+        await store.async_save(
+            {
+                "version": VERSION,
+                "pending_restart": True,
+            }
+        )
 
     if data.get("pending_restart"):
 
@@ -63,10 +68,12 @@ async def detect_version_update(hass):
             ISSUE_RESTART,
         )
 
-        await store.async_save({
-            "version": VERSION,
-            "pending_restart": False,
-        })
+        await store.async_save(
+            {
+                "version": VERSION,
+                "pending_restart": False,
+            }
+        )
 
 
 """ 
@@ -96,6 +103,7 @@ def register_frontend(hass):
     )
  """
 
+
 async def register_services(hass, entry):
     now = datetime.now()
 
@@ -114,7 +122,7 @@ async def register_services(hass, entry):
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
-    clsLogger.log("__init__.py", "async_setup_entry", "Setup services done.")
+    # clsLogger.log("__init__.py", "async_setup_entry", "Setup services done.")
 
 
 async def async_setup(hass: HomeAssistant, config: dict):
@@ -127,7 +135,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     await register_services(hass, entry)
 
     await detect_version_update(hass)
-    
+
     return True
 
 
