@@ -2008,7 +2008,7 @@ class VNLunarCalendar extends HTMLElement {
         default:
           return this.theme_newyear_day(bg_newyear_day);
       }
-    } else if (dayinfo.lunar.month == 7 && dayinfo.lunar.day == 15) {
+    } else if (dayinfo.lunar.month == 8 && dayinfo.lunar.day == 15) {
       return this.theme_autumn_festival(bg_autumn_night_15);
     } else {
       switch (style) {
